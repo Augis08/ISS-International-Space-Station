@@ -1,7 +1,28 @@
-public class Position extends IssPosition {
+package Entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table (name = "positions")
+public class CurrentPosition extends IssPosition {
+    @Id
+    @GeneratedValue
+    private int id;
+
     private long timestamp;
+
+    @OneToOne
     private IssPosition iss_position;
+
     private String message;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public long getTimestamp() {
         return timestamp;
@@ -31,7 +52,7 @@ public class Position extends IssPosition {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "Entity.Position{" +
                 "timestamp=" + timestamp +
                 ", iss_position=" + iss_position +
                 '}';
