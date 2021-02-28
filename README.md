@@ -1,4 +1,5 @@
 ISS-International-Space-Station
+
 Brief description of the system¶ The project should create an application which showcases information about the movement of the International Space Station (ISS).
 
 Main system functions ISS traffic data download from the relevant web service Processing of downloaded data on the application side Downloaded data should be saved to the database Technologies Console application JDBC or Hibernate Domain logic divided into layers, eg DAO, Service Unit testing tools Optionally:
