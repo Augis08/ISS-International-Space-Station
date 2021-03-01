@@ -3,25 +3,43 @@ package Entity;
 import javax.persistence.*;
 
 @Entity
-@Table (name = "positions")
-public class CurrentPosition extends IssPosition {
-    @Id
-    @GeneratedValue
-    private int id;
+@Table(name = "currentPositions")
+public class CurrentPosition {
+    public CurrentPosition() {
+    }
 
-    private long timestamp;
+    // FIELDS
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
-    private IssPosition iss_position;
+    private IssPosition issPosition;
 
+
+    private long timestamp;
     private String message;
 
-    public int getId() {
+
+    // CONSTRUCTOR
+
+
+    // GETTERS AND SETTERS
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public IssPosition getIssPosition() {
+        return issPosition;
+    }
+
+    public void setIssPosition(IssPosition issPosition) {
+        this.issPosition = issPosition;
     }
 
     public long getTimestamp() {
@@ -32,14 +50,6 @@ public class CurrentPosition extends IssPosition {
         this.timestamp = timestamp;
     }
 
-    public IssPosition getIss_position() {
-        return iss_position;
-    }
-
-    public void setIss_position(IssPosition iss_position) {
-        this.iss_position = iss_position;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -47,14 +57,18 @@ public class CurrentPosition extends IssPosition {
     public void setMessage(String message) {
         this.message = message;
     }
+
+
     // METHODS
 
 
     @Override
     public String toString() {
-        return "Entity.Position{" +
-                "timestamp=" + timestamp +
-                ", iss_position=" + iss_position +
+        return "CurrentPosition{" +
+                "ID = " + id +
+                ", POSITION =" + issPosition +
+                ", TIMESTAMP =" + timestamp +
+                ", MESSAGE ='" + message + '\'' +
                 '}';
     }
 }
