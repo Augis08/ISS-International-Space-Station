@@ -7,26 +7,14 @@ import javax.persistence.*;
 public class IssPosition {
 
     @Id
-    @Column(name = "position_ID")
+    @GeneratedValue
+//    @Column(name = "position_ID")
     private Long id;
     private double latitude;
     private double longitude;
 
 
-    @OneToOne(mappedBy = "issPosition")
-    private CurrentPosition currentPosition;
-
-
     // GETTER SETTER
-
-
-    public CurrentPosition getCurrentPosition() {
-        return currentPosition;
-    }
-
-    public void setCurrentPosition(CurrentPosition currentPosition) {
-        this.currentPosition = currentPosition;
-    }
 
     public Long getId() {
         return id;
@@ -50,5 +38,14 @@ public class IssPosition {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "IssPosition{" +
+                "id=" + id +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

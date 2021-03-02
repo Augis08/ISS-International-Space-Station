@@ -15,7 +15,7 @@ public class CurrentPosition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JsonProperty("iss_position")
     private IssPosition issPosition;
 
@@ -65,14 +65,12 @@ public class CurrentPosition {
 
     // METHODS
 
-
     @Override
     public String toString() {
         return "CurrentPosition{" +
                 "ID = " + id +
                 ", POSITION =" + issPosition +
                 ", TIMESTAMP =" + timestamp +
-                ", MESSAGE ='" + message + '\'' +
                 '}';
     }
 }
