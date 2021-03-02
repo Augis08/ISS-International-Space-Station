@@ -1,5 +1,7 @@
 package Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,7 @@ public class CurrentPosition {
     private Long id;
 
     @OneToOne
+    @JsonProperty("iss_position")
     private IssPosition issPosition;
 
 
@@ -25,6 +28,7 @@ public class CurrentPosition {
 
 
     // GETTERS AND SETTERS
+
 
     public Long getId() {
         return id;

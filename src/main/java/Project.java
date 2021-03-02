@@ -36,10 +36,6 @@ public class Project {
         System.out.println(position);
 
 
-        entityManager.persist(position);
-
         t.commit();
-
-        System.out.println(position);
     }
 }

@@ -12,6 +12,7 @@ public class IssPosition {
     private double latitude;
     private double longitude;
 
+
     @OneToOne(mappedBy = "issPosition")
     private CurrentPosition currentPosition;
 
