@@ -33,7 +33,7 @@ public class Project {
         JSONObject jsonObject1 = (JSONObject) JsonReader.writeJsonSimpleDemo(path1);
         JSONObject jsonObject2 = (JSONObject) JsonReader.writeJsonSimpleDemo(path2);
         JSONObject jsonObject3 = (JSONObject) JsonReader.writeJsonSimpleDemo(path3);
-//        JSONObject jsonObject4 = (JSONObject) JsonReader.writeJsonSimpleDemo(path4);
+        JSONObject jsonObject4 = (JSONObject) JsonReader.writeJsonSimpleDemo(path4);
 
         IssPositionInTime position1 = JsonUtils.fromJson(jsonObject1.toString(), IssPositionInTime.class);
         IssPositionInTime position2 = JsonUtils.fromJson(jsonObject2.toString(), IssPositionInTime.class);
@@ -51,10 +51,10 @@ public class Project {
 //        List<CurrentPosition> cp = em.createQuery("FROM CurrentPosition", CurrentPosition.class).getResultList();
 //        cp.forEach(System.out::println);
 //
-        System.out.println("---------------");
+//        System.out.println("---------------");
 //
-        List<IssSpeed> issSpeeds = em.createQuery("FROM IssSpeed", IssSpeed.class).getResultList();
-        issSpeeds.forEach(System.out::println);
+//        List<IssSpeed> issSpeeds = em.createQuery("FROM IssSpeed", IssSpeed.class).getResultList();
+//        issSpeeds.forEach(System.out::println);
 //
 //        System.out.println("---------------");
 //
