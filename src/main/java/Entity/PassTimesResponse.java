@@ -1,14 +1,11 @@
 package Entity;
 
-public class IssPassTimes {
-    PassTimesRequest passTimesRequest;
-    PassTimesResponse passTimesResponse;
+public class PassTimesResponse {
+    private int duration;
+    private int risetime;
 
 
-
-
-    // {"request":{"altitude":100,"datetime":1614797020,"passes":5,"latitude":65.0,"longitude":65.0},
-    // "response":[
+//    "response":[
     // {"duration":414,"risetime":1614810284},
     // {"duration":494,"risetime":1614815974},
     // {"duration":464,"risetime":1614821723},

@@ -13,18 +13,16 @@ public class IssSpeed {
     private final double issSpeed;
 
     @OneToOne
-    private final CurrentPosition currentPosition1;
+    private final IssPositionInTime issPositionInTime1;
 
     @OneToOne
-    private final CurrentPosition currentPosition2;
+    private final IssPositionInTime issPositionInTime2;
 
 
-    public IssSpeed(CurrentPosition currentPosition1, CurrentPosition currentPosition2) {
-        this.currentPosition1 = currentPosition1;
-        this.currentPosition2 = currentPosition2;
-        this.issSpeed = calculateDistanceInKm()
-                / calculateTime()
-                * 3600;
+    public IssSpeed(IssPositionInTime issPositionInTime1, IssPositionInTime issPositionInTime2) {
+        this.issPositionInTime1 = issPositionInTime1;
+        this.issPositionInTime2 = issPositionInTime2;
+        this.issSpeed = new SpeedCalculator(issPositionInTime1,issPositionInTime2).getIssSpeed();
     }
 
     public Long getId() {
@@ -33,20 +31,6 @@ public class IssSpeed {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    private double calculateDistanceInKm () {
-        double lat1 = currentPosition1.getIssPosition().getLatitude();
-        double long1 = currentPosition1.getIssPosition().getLongitude();
-        double lat2 = currentPosition2.getIssPosition().getLatitude();
-        double long2 = currentPosition2.getIssPosition().getLongitude();
-
-        double distance = org.apache.lucene.util.SloppyMath.haversinMeters(lat1, long1, lat2, long2);
-        return distance/1000;
-    }
-
-    private double calculateTime (){
-        return Math.abs(currentPosition1.getTimestamp() - currentPosition2.getTimestamp());
     }
 
     public double getIssSpeed() {
@@ -58,8 +42,8 @@ public class IssSpeed {
         return "IssSpeed{" +
                 "id=" + id +
                 ", issSpeed=" + issSpeed +
-                ", currentPosition1=" + currentPosition1 +
-                ", currentPosition2=" + currentPosition2 +
+                ", currentPosition1=" + issPositionInTime1 +
+                ", currentPosition2=" + issPositionInTime2 +
                 '}';
     }
 }

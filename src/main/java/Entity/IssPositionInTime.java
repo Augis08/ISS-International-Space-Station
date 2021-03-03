@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "currentPositions")
-public class CurrentPosition {
-    public CurrentPosition() {
+@Table(name = "positionsInTime")
+public class IssPositionInTime {
+    public IssPositionInTime() {
     }
 
     // FIELDS
@@ -18,7 +18,6 @@ public class CurrentPosition {
     @OneToOne(cascade = CascadeType.ALL)
     @JsonProperty("iss_position")
     private IssPosition issPosition;
-
 
     private long timestamp;
     private String message;
