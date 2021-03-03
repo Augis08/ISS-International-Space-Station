@@ -6,7 +6,6 @@ import utility.JsonUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import java.util.List;
 
 
 public class Project {
@@ -25,15 +24,15 @@ public class Project {
         EntityTransaction t = em.getTransaction();
 
         t.begin();
-        String path1 = "C:\\Users\\Augis\\Desktop\\JAVA\\ISSproject\\iss-now1.json";
-        String path2 = "C:\\Users\\Augis\\Desktop\\JAVA\\ISSproject\\iss-now2.json";
-        String path3 = "C:\\Users\\Augis\\Desktop\\JAVA\\ISSproject\\astros.json";
-        String path4 = "C:\\Users\\Augis\\Desktop\\JAVA\\ISSproject\\iss-pass.json";
+        String path1 = "/Users/arnis/Desktop/Coding/JAVA/Git/ISS/iss-now1.json";
+        String path2 = "/Users/arnis/Desktop/Coding/JAVA/Git/ISS/iss-now2.json";
+        String path3 = "/Users/arnis/Desktop/Coding/JAVA/Git/ISS/astros.json";
+      //  String path4 = "/Users/arnis/Desktop/Coding/JAVA/Git/ISS/iss-pass.json";
 
         JSONObject jsonObject1 = (JSONObject) JsonReader.writeJsonSimpleDemo(path1);
         JSONObject jsonObject2 = (JSONObject) JsonReader.writeJsonSimpleDemo(path2);
         JSONObject jsonObject3 = (JSONObject) JsonReader.writeJsonSimpleDemo(path3);
-        JSONObject jsonObject4 = (JSONObject) JsonReader.writeJsonSimpleDemo(path4);
+        // JSONObject jsonObject4 = (JSONObject) JsonReader.writeJsonSimpleDemo(path4);
 
         IssPositionInTime position1 = JsonUtils.fromJson(jsonObject1.toString(), IssPositionInTime.class);
         IssPositionInTime position2 = JsonUtils.fromJson(jsonObject2.toString(), IssPositionInTime.class);
