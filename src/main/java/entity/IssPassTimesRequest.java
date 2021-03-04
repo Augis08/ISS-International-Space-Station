@@ -1,6 +1,17 @@
-package Entity;
+package entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table (name = "issPassTimesRequests")
 public class IssPassTimesRequest {
+    @Id
+    @GeneratedValue
+    private Long Id;
+
     private double altitude;
     private int datetime;
     private int passes;
@@ -49,7 +60,7 @@ public class IssPassTimesRequest {
 
     @Override
     public String toString() {
-        return "IssPassTimesRequest{" +
+        return "{" +
                 "altitude=" + altitude +
                 ", datetime=" + datetime +
                 ", passes=" + passes +

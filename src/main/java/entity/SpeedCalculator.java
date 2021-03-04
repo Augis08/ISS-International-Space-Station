@@ -1,10 +1,10 @@
-package Entity;
+package entity;
 
 public class SpeedCalculator {
 
-    private IssPositionInTime issPositionInTime1;
-    private IssPositionInTime issPositionInTime2;
-    private double issSpeed;
+    private final IssPositionInTime issPositionInTime1;
+    private final IssPositionInTime issPositionInTime2;
+    private final double issSpeed;
     public SpeedCalculator(IssPositionInTime issPositionInTime1, IssPositionInTime issPositionInTime2) {
         this.issPositionInTime1 = issPositionInTime1;
         this.issPositionInTime2 = issPositionInTime2;

@@ -1,8 +1,21 @@
-package Entity;
+package entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class IssPassTimesResponse {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private int duration;
     private int risetime;
+
+    public Long getId() {
+        return Id;
+    }
 
     public int getDuration() {
         return duration;
@@ -22,10 +35,10 @@ public class IssPassTimesResponse {
 
     @Override
     public String toString() {
-        return "IssPassTimesResponse{" +
-                "duration=" + duration +
-                ", risetime=" + risetime +
-                '}';
+        return "{" +
+                "duration: " + duration +
+                ", risetime: " + risetime +
+                "}";
     }
 
     //    "response":[
