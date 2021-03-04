@@ -18,7 +18,7 @@ Report the number of people in space within the ISS The user selecting this opti
 
 Optional functionalities Statistic data The user should be able to calculate, e.g.:
 
-average speed over a specific period of time, e.g. month, year. These calculations should be based on the current records from the database how many times the ISS has been over a given location in the time interval number of people on the ISS space mission Visualisation¶ As part of the graphical interface, implement a mechanism that displays the current position of the ISS on the world map.
+average speed over a specific period of time, e.g. month, year. These calculations should be based on the current records from the database how many times the ISS has been over a given location in the time interval number of people on the ISS space mission Visualisation¶ As part of the graphical interface, implement a mechanism that displays the current currentPosition of the ISS on the world map.
 
 Data write/read The user should be able to save the currently collected data to a file in any format, and then restore them by saving directly to the database.
 

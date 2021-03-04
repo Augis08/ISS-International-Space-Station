@@ -7,8 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "positionsInTime")
 public class IssPositionInTime {
-    public IssPositionInTime() {
-    }
 
     // FIELDS
     @Id
@@ -24,7 +22,7 @@ public class IssPositionInTime {
 
 
     // CONSTRUCTOR
-
+    public IssPositionInTime() {}
 
     // GETTERS AND SETTERS
 
