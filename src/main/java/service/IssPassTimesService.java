@@ -15,8 +15,7 @@ public class IssPassTimesService {
         this.issPassTimesRepository = issPassTimesRepository;
     }
 
-    public void saveIssPassTimes(String jsonString) throws Exception {
-        IssPassTimes issPassTimes = JsonUtils.fromJson(jsonString, IssPassTimes.class);
+    public void saveIssPassTimes(IssPassTimes issPassTimes) {
         issPassTimesRepository.save(issPassTimes);
     }
 

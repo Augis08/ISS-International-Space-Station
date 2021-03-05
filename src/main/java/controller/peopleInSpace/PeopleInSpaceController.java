@@ -21,7 +21,8 @@ public class PeopleInSpaceController implements Controller {
     @Override
     public void run() throws JsonProcessingException {
         output.produce("***** PEOPLE IN SPACE *****");
-        PeopleInSpace peopleInSpace = JsonUtils.fromJson(new HttpRequest(new Url().getPeopleInSpaceUrl()).toString(), PeopleInSpace.class);        peopleInSpaceService.savePeopleInSpace(peopleInSpace);
+        PeopleInSpace peopleInSpace = JsonUtils.fromJson(new HttpRequest(new Url().getPeopleInSpaceUrl()).toString(), PeopleInSpace.class);
+        peopleInSpaceService.savePeopleInSpace(peopleInSpace);
         output.produce("Number of people in space within the ISS: " + peopleInSpace.getNumberOfPeople());
     }
 }
