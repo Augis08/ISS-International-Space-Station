@@ -35,7 +35,7 @@ public class Project {
 
         IssSpeedController issSpeedController = new IssSpeedController(issSpeedService, receiver, output);
         IssPassTimesController issPassTimesController = new IssPassTimesController(issPassTimesService, receiver, output);
-        PeopleInSpaceController peopleInSpaceController = new PeopleInSpaceController(peopleInSpaceService, receiver, output);
+        PeopleInSpaceController peopleInSpaceController = new PeopleInSpaceController(peopleInSpaceService, output);
 
         return new EntryController(issPassTimesController, issSpeedController, peopleInSpaceController, receiver, output);
 

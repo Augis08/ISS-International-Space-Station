@@ -2,8 +2,6 @@ package service;
 
 import entity.PeopleInSpace;
 import repositories.peopleInSpace.PeopleInSpaceRepository;
-import utilities.JsonUtils;
-
 import java.util.List;
 
 public class PeopleInSpaceService {
@@ -14,9 +12,8 @@ public class PeopleInSpaceService {
         this.PeopleInSpaceRepository = PeopleInSpaceRepository;
     }
 
-    public void savePeopleInSpace(String jsonString) throws Exception {
-        PeopleInSpace PeopleInSpace = JsonUtils.fromJson(jsonString, PeopleInSpace.class);
-        PeopleInSpaceRepository.save(PeopleInSpace);
+    public void savePeopleInSpace(PeopleInSpace peopleInSpace) {
+        PeopleInSpaceRepository.save(peopleInSpace);
     }
 
     public List<PeopleInSpace> findAll() {
