@@ -1,5 +1,7 @@
 package entity;
 
+import service.SpeedCalculator;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,17 +14,19 @@ public class IssSpeed {
 
     private final double issSpeed;
 
-    @OneToOne
-    private final IssPositionInTime issPositionInTime1;
+    @OneToOne(mappedBy = "issSpeed")
+    @PrimaryKeyJoinColumn
+    private final IssPosition issPosition1;
 
-    @OneToOne
-    private final IssPositionInTime issPositionInTime2;
+    @OneToOne(mappedBy = "issSpeed")
+    @PrimaryKeyJoinColumn
+    private final IssPosition issPosition2;
 
 
-    public IssSpeed(IssPositionInTime issPositionInTime1, IssPositionInTime issPositionInTime2) {
-        this.issPositionInTime1 = issPositionInTime1;
-        this.issPositionInTime2 = issPositionInTime2;
-        this.issSpeed = new SpeedCalculator(issPositionInTime1,issPositionInTime2).getIssSpeed();
+    public IssSpeed(IssPosition issPosition1, IssPosition issPosition2) {
+        this.issPosition1 = issPosition1;
+        this.issPosition2 = issPosition2;
+        this.issSpeed = new SpeedCalculator(issPosition1, issPosition2).getIssSpeed();
     }
 
     public Long getId() {
@@ -40,10 +44,10 @@ public class IssSpeed {
     @Override
     public String toString() {
         return "IssSpeed{" +
-                "id=" + id +
-                ", issSpeed=" + issSpeed +
-                ", currentPosition1=" + issPositionInTime1 +
-                ", currentPosition2=" + issPositionInTime2 +
+                "id= " + id +
+                ", issSpeed= " + issSpeed +
+                ", Position1= " + issPosition1 +
+                ", Position2= " + issPosition2 +
                 '}';
     }
 }

@@ -23,9 +23,11 @@ public class AbstractRepository <T, ID> implements CrudRepository<T,ID> {
     public void save(T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         boolean isTransactionActive = transaction.isActive();
-        if(!isTransactionActive) {
+        if(!isTransactionActive)
+            transaction.begin();
+        entityManager.persist(entity);
+        if(!isTransactionActive)
             transaction.commit();
-        }
     }
 
     @Override

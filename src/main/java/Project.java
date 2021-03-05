@@ -1,21 +1,49 @@
+import controller.entry.EntryController;
+import controller.issPassTimes.IssPassTimesController;
+import controller.issSpeed.IssSpeedController;
+import controller.peopleInSpace.PeopleInSpaceController;
 import entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import utilities.HttpRequest;
-import utilities.JsonUtils;
+import repositories.issPassTimes.IssPassTimesRepository;
+import repositories.issSpeed.IssSpeedRepository;
+import repositories.peopleInSpace.PeopleInSpaceRepository;
+import service.IssPassTimesService;
+import service.IssSpeedService;
+import service.PeopleInSpaceService;
+import utilities.input.DefaultInputReceiver;
+import utilities.input.InputReceiver;
+import utilities.output.DefaultOutputProducer;
+import utilities.output.OutputProducer;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 
 public class Project {
 
-    public void run() throws Exception {
+        public static final String HIBERNATE_CONFIGURATION = "hibernate.cfg.xml";
+
+    public Project() throws Exception {
+        constructEntryController(entityManager()).run();
+    }
+
+    private EntryController constructEntryController (EntityManager entityManager){
+        InputReceiver receiver = new DefaultInputReceiver();
+        OutputProducer output = new DefaultOutputProducer();
+        IssSpeedService issSpeedService = new IssSpeedService(new IssSpeedRepository(entityManager));
+        IssPassTimesService issPassTimesService = new IssPassTimesService(new IssPassTimesRepository(entityManager));
+        PeopleInSpaceService peopleInSpaceService = new PeopleInSpaceService(new PeopleInSpaceRepository(entityManager));
+
+        IssSpeedController issSpeedController = new IssSpeedController(issSpeedService, receiver, output);
+        IssPassTimesController issPassTimesController = new IssPassTimesController(issPassTimesService, receiver, output);
+        PeopleInSpaceController peopleInSpaceController = new PeopleInSpaceController(peopleInSpaceService, receiver, output);
+
+        return new EntryController(issPassTimesController, issSpeedController, peopleInSpaceController, receiver, output);
+
+    }
+
+    private EntityManager entityManager(){
         SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .addAnnotatedClass(IssPositionInTime.class)
+                .configure(HIBERNATE_CONFIGURATION)
                 .addAnnotatedClass(IssPosition.class)
                 .addAnnotatedClass(IssSpeed.class)
                 .addAnnotatedClass(PeopleInSpace.class)
@@ -25,57 +53,7 @@ public class Project {
                 .addAnnotatedClass(IssPassTimesResponse.class)
                 .buildSessionFactory();
 
-        EntityManager em = sessionFactory.createEntityManager();
-        EntityTransaction t = em.getTransaction();
-
-        t.begin();
-
-        String issNowUrl = "http://api.open-notify.org/iss-now.json";
-        String jsonIssLocationNow1 = new HttpRequest(issNowUrl).toString();
-        TimeUnit.SECONDS.sleep(5);
-        String jsonIssLocationNow2 = new HttpRequest(issNowUrl).toString();
-
-        int lat = 60;
-        int lon = 60;
-        String passTimesUrl = "http://api.open-notify.org/iss-pass.json?lat=" + lat + "&lon=" + lon;
-        String jsonIssPass = new HttpRequest(passTimesUrl).toString();
-
-        String peopleInSpaceUrl = "http://api.open-notify.org/astros.json";
-        String jsonPeopleInSpace = new HttpRequest(peopleInSpaceUrl).toString();
-
-        IssPositionInTime position1 = JsonUtils.fromJson(jsonIssLocationNow1, IssPositionInTime.class);
-        IssPositionInTime position2 = JsonUtils.fromJson(jsonIssLocationNow2, IssPositionInTime.class);
-        PeopleInSpace peopleInSpace = JsonUtils.fromJson(jsonPeopleInSpace, PeopleInSpace.class);
-        IssPassTimes issPassTimes = JsonUtils.fromJson(jsonIssPass, IssPassTimes.class);
-
-        IssSpeed issSpeed = new IssSpeed(position1, position2);
-
-        em.persist(position1);
-        em.persist(position2);
-        em.persist(issSpeed);
-        em.persist(peopleInSpace);
-        em.persist(issPassTimes);
-
-        t.commit();
-
-        System.out.println("---------------");
-
-        List<IssPositionInTime> cp = em.createQuery("FROM IssPositionInTime", IssPositionInTime.class).getResultList();
-        cp.forEach(System.out::println);
-
-        System.out.println("---------------");
-
-        List<IssSpeed> issSpeeds = em.createQuery("FROM IssSpeed", IssSpeed.class).getResultList();
-        issSpeeds.forEach(System.out::println);
-
-        System.out.println("---------------");
-
-        List<PeopleInSpace> ps = em.createQuery("FROM PeopleInSpace", PeopleInSpace.class).getResultList();
-        ps.forEach(System.out::println);
-
-        System.out.println("---------------");
-
-        List<IssPassTimes> ipt = em.createQuery("FROM IssPassTimes", IssPassTimes.class).getResultList();
-        ipt.forEach(System.out::println);
+        return sessionFactory.createEntityManager();
     }
+
 }

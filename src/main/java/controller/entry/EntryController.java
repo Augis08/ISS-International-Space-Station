@@ -25,7 +25,7 @@ public class EntryController implements Controller {
     }
 
     @Override
-    public void run() {
+    public void run() throws Exception {
         output.produce("***** Welcome *****");
         printInstructions();
         receiveInputAndAct();
@@ -38,7 +38,7 @@ public class EntryController implements Controller {
         output.produce("X - Exit");
     }
 
-    private void receiveInputAndAct() {
+    private void receiveInputAndAct() throws Exception {
         String input = receiver.receiveLine().toUpperCase();
         switch (input){
             case "S":

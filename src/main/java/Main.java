@@ -1,10 +1,10 @@
-
-
 public class Main {
 
         public static void main(String[] args) throws Exception {
 
-           new Project().run();
+//           new ProjectTest().run();
+
+           new Project();
 
         }
     }

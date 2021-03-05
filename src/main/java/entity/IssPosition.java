@@ -1,20 +1,31 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.HashMap;
 
 @Entity
-@Table(name = "position_data")
+//@Table(name = "issPositions")
 public class IssPosition {
+    public IssPosition() {
+    }
 
+    // FIELDS
     @Id
-    @GeneratedValue
-//    @Column(name = "position_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private double latitude;
-    private double longitude;
+    private HashMap<String, Double> iss_position;
+    private long timestamp;
+    private String message;
+
+    @ManyToOne
+    @MapsId
+    @JoinColumn(name = "issSpeed_id")
+    private IssSpeed issSpeed;
+
+    // CONSTRUCTOR
 
 
-    // GETTER SETTER
+    // GETTERS AND SETTERS
 
     public Long getId() {
         return id;
@@ -24,28 +35,37 @@ public class IssPosition {
         this.id = id;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public long getTimestamp() {
+        return timestamp;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public String getMessage() {
+        return message;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setMessage(String message) {
+        this.message = message;
     }
+
+    public HashMap<String, Double> getIss_position() {
+        return iss_position;
+    }
+
+    public void setIss_position(HashMap<String, Double> iss_position) {
+        this.iss_position = iss_position;
+    }
+
+    // METHODS
 
     @Override
     public String toString() {
-        return "IssPosition{" +
-                "id=" + id +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
+        return "Position{" +
+                ", POSITION =" + iss_position +
+                ", TIMESTAMP =" + timestamp +
                 '}';
     }
 }
