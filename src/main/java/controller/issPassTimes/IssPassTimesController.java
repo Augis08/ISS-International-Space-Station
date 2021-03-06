@@ -27,7 +27,7 @@ public class IssPassTimesController implements Controller {
         printInstructions();
         Integer latitude = receiveLatitude();
         Integer longitude = receiveLongitude();
-        String urlForIssPassTimes = new Url().getPassTimesUrl(latitude, longitude);
+        String urlForIssPassTimes = new Url().getIssPassTimesUrl(latitude, longitude);
         String jsonForIssPassTimes = new HttpRequest(urlForIssPassTimes).toString();
         IssPassTimes issPassTimes = JsonUtils.fromJson(jsonForIssPassTimes, IssPassTimes.class);
         output.produce("ISS pass times at location with latitude " + latitude + " and longitude " + longitude + ": ");
@@ -40,11 +40,11 @@ public class IssPassTimesController implements Controller {
     }
 
     private boolean latitudeValidation(Integer lat) {
-        return lat >= -70 && lat <= 70;
+        return lat >= -70 && lat <= 70 && lat != 0;
     }
 
     private boolean longitudeValidation(Integer lon) {
-        return lon >= -180 && lon <= 180;
+        return lon >= -180 && lon <= 180 && lon != 0;
     }
 
     private Integer receiveLatitude() {
@@ -52,7 +52,7 @@ public class IssPassTimesController implements Controller {
         Integer lat = Integer.parseInt(receiver.receiveLine());
         if (!latitudeValidation(lat)) {
             output.produce("Wrong insert. Latitude valid range is {-70...70}");
-            receiveLatitude();
+            lat = receiveLatitude();
         }
         return lat;
     }
@@ -62,7 +62,7 @@ public class IssPassTimesController implements Controller {
         Integer lon = Integer.parseInt(receiver.receiveLine());
         if (!longitudeValidation(lon)) {
             output.produce("Wrong insert. Longitude valid range is {-180...180}");
-            receiveLongitude();
+            lon = receiveLongitude();
         }
         return lon;
     }

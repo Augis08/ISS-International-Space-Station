@@ -3,29 +3,30 @@ package entity;
 import service.SpeedCalculator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table (name = "issSpeed")
+@Table(name = "issSpeed")
 public class IssSpeed {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private final double issSpeed;
+    private double issSpeed;
 
-    @OneToOne(mappedBy = "issSpeed")
+    @OneToMany(mappedBy = "issSpeed")
     @PrimaryKeyJoinColumn
-    private final IssPosition issPosition1;
+    private List<IssPosition> issPosition;
 
-    @OneToOne(mappedBy = "issSpeed")
-    @PrimaryKeyJoinColumn
-    private final IssPosition issPosition2;
-
+    protected IssSpeed() {
+    }
 
     public IssSpeed(IssPosition issPosition1, IssPosition issPosition2) {
-        this.issPosition1 = issPosition1;
-        this.issPosition2 = issPosition2;
+        this.issPosition = new ArrayList<>();
+        issPosition.add(issPosition1);
+        issPosition.add(issPosition2);
         this.issSpeed = new SpeedCalculator(issPosition1, issPosition2).getIssSpeed();
     }
 
@@ -41,13 +42,20 @@ public class IssSpeed {
         return issSpeed;
     }
 
+    public List<IssPosition> getIssPosition() {
+        return issPosition;
+    }
+
+    public void setIssPosition(List<IssPosition> issPosition) {
+        this.issPosition = issPosition;
+    }
+
     @Override
     public String toString() {
         return "IssSpeed{" +
                 "id= " + id +
                 ", issSpeed= " + issSpeed +
-                ", Position1= " + issPosition1 +
-                ", Position2= " + issPosition2 +
+                ", issPositions= " + issPosition.toString() +
                 '}';
     }
 }

@@ -4,15 +4,14 @@ import javax.persistence.*;
 import java.util.HashMap;
 
 @Entity
-//@Table(name = "issPositions")
+@Table(name = "issPositions")
 public class IssPosition {
-    public IssPosition() {
-    }
 
     // FIELDS
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private HashMap<String, Double> iss_position;
     private long timestamp;
     private String message;
@@ -23,7 +22,6 @@ public class IssPosition {
     private IssSpeed issSpeed;
 
     // CONSTRUCTOR
-
 
     // GETTERS AND SETTERS
 
@@ -63,9 +61,9 @@ public class IssPosition {
 
     @Override
     public String toString() {
-        return "Position{" +
-                ", POSITION =" + iss_position +
-                ", TIMESTAMP =" + timestamp +
+        return "{" +
+                "Position: " +  iss_position +
+                ", TIMESTAMP: " + timestamp +
                 '}';
     }
 }
