@@ -4,10 +4,9 @@ import javax.persistence.*;
 import java.util.HashMap;
 
 @Entity
-//@Table(name = "issPositions")
+@Table(name = "issPositions")
 public class IssPosition {
-    public IssPosition() {
-    }
+
 
     // FIELDS
     @Id
@@ -23,7 +22,6 @@ public class IssPosition {
     private IssSpeed issSpeed;
 
     // CONSTRUCTOR
-
 
     // GETTERS AND SETTERS
 

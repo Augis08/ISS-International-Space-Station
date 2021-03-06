@@ -33,6 +33,7 @@ public class IssPassTimesController implements Controller {
         output.produce("ISS pass times at location with latitude " + latitude + " and longitude " + longitude + ": ");
         issPassTimes.getResponse().forEach(System.out::println);
         issPassTimesService.saveIssPassTimes(issPassTimes);
+        issPassTimesService.findAll().forEach(System.out::println);
     }
 
     private void printInstructions() {

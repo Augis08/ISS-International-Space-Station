@@ -9,8 +9,9 @@
         <property name="connection.username">ISS</property>
         <property name="connection.password">123456</property>
 <!--        <property name="show_sql">true</property>-->
-        <property name="hbm2dll.auto">create</property>
-        <property name="hibernate.hbm2ddl.auto">create</property>
+<!--        <property name="hbm2dll.auto">create</property> -->
+<!--        <property name="hibernate.hbm2ddl.auto">create</property>-->
+        <property name="hibernate.hbm2ddl.auto">update</property>
     </session-factory>
 </hibernate-configuration>
 

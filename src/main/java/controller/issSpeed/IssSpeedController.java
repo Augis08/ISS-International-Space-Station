@@ -30,6 +30,7 @@ public class IssSpeedController implements Controller {
         output.produce("***** ISS SPEED *****");
         calculateAndSaveIssSpeed();
         print();
+        issSpeedService.findAll().forEach(System.out::println);
     }
 
     private void calculateAndSaveIssSpeed() throws Exception {

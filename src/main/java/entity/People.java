@@ -11,6 +11,9 @@ public class People {
     private String craft;
     private String name;
 
+    public People() {
+    }
+
     public String getCraft() {
         return craft;
     }

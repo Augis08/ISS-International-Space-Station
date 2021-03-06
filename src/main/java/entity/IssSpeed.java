@@ -12,16 +12,18 @@ public class IssSpeed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private final double issSpeed;
+    private double issSpeed;
 
     @OneToOne(mappedBy = "issSpeed")
     @PrimaryKeyJoinColumn
-    private final IssPosition issPosition1;
+    private IssPosition issPosition1;
 
     @OneToOne(mappedBy = "issSpeed")
     @PrimaryKeyJoinColumn
-    private final IssPosition issPosition2;
+    private IssPosition issPosition2;
 
+    public IssSpeed() {
+    }
 
     public IssSpeed(IssPosition issPosition1, IssPosition issPosition2) {
         this.issPosition1 = issPosition1;
