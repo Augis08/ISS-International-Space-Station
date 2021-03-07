@@ -34,7 +34,7 @@ public class IssSpeedController implements Controller {
 
     private void calculateAndSaveIssSpeed() throws Exception {
         String jsonIssLocationNow1 = new HttpRequest(new Url().getIssNowUrl()).toString();
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(3);
         String jsonIssLocationNow2 = new HttpRequest(new Url().getIssNowUrl()).toString();
         IssPosition position1 = JsonUtils.fromJson(jsonIssLocationNow1, IssPosition.class);
         IssPosition position2 = JsonUtils.fromJson(jsonIssLocationNow2, IssPosition.class);

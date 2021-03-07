@@ -10,7 +10,7 @@ public class Url {
         return "http://api.open-notify.org/iss-now.json";
     }
 
-    public String getIssPassTimesUrl(int lat, int lon) {
+    public String getIssPassTimesUrl(double lat, double lon) {
         return "http://api.open-notify.org/iss-pass.json?lat=" + lat + "&lon=" + lon;
     }
 

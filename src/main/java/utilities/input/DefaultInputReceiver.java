@@ -10,4 +10,9 @@ public class DefaultInputReceiver implements InputReceiver{
     public String receiveLine() {
         return in.nextLine();
     }
+
+    @Override
+    public double receiveNumber() {
+        return in.nextDouble();
+    }
 }

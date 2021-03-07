@@ -25,31 +25,42 @@ public class IssPassTimesController implements Controller {
     public void run() throws JsonProcessingException {
         output.produce("***** ISS PASS TIMES *****");
         printInstructions();
-        Integer latitude = receiveLatitude();
-        Integer longitude = receiveLongitude();
+        IssPassTimes issPassTimes = getIssPassTimes();
+        issPassTimesService.saveIssPassTimes(issPassTimes);
+    }
+
+    private IssPassTimes getIssPassTimes() throws JsonProcessingException {
+        double latitude = receiveLatitude();
+        double longitude = receiveLongitude();
         String urlForIssPassTimes = new Url().getIssPassTimesUrl(latitude, longitude);
         String jsonForIssPassTimes = new HttpRequest(urlForIssPassTimes).toString();
         IssPassTimes issPassTimes = JsonUtils.fromJson(jsonForIssPassTimes, IssPassTimes.class);
         output.produce("ISS pass times at location with latitude " + latitude + " and longitude " + longitude + ": ");
         issPassTimes.getResponse().forEach(System.out::println);
-        issPassTimesService.saveIssPassTimes(issPassTimes);
+        return issPassTimes;
     }
 
     private void printInstructions() {
         output.produce("To get upcoming ISS runs insert locations latitude and longitude: ");
     }
 
-    private boolean latitudeValidation(Integer lat) {
+    private boolean latitudeValidation(double lat) {
         return lat >= -70 && lat <= 70 && lat != 0;
     }
 
-    private boolean longitudeValidation(Integer lon) {
+    private boolean longitudeValidation(double lon) {
         return lon >= -180 && lon <= 180 && lon != 0;
     }
 
-    private Integer receiveLatitude() {
+    private double receiveLatitude() {
         output.produce("Insert latitude: ");
-        Integer lat = Integer.parseInt(receiver.receiveLine());
+        double lat = 0;
+        try {
+            lat = Double.parseDouble(receiver.receiveLine().replace(",","."));
+        } catch (NumberFormatException e){
+            output.produce("Wrong insert. Latitude must be a number");
+            lat = receiveLatitude();
+        }
         if (!latitudeValidation(lat)) {
             output.produce("Wrong insert. Latitude valid range is {-70...70}");
             lat = receiveLatitude();
@@ -57,9 +68,15 @@ public class IssPassTimesController implements Controller {
         return lat;
     }
 
-    private Integer receiveLongitude() {
+    private double receiveLongitude() {
         output.produce("Insert longitude: ");
-        Integer lon = Integer.parseInt(receiver.receiveLine());
+        double lon = 0;
+        try {
+            lon = Double.parseDouble(receiver.receiveLine().replace(",","."));
+        } catch (NumberFormatException e) {
+            output.produce("Wrong insert. Latitude must be a number");
+            lon = receiveLongitude();
+        }
         if (!longitudeValidation(lon)) {
             output.produce("Wrong insert. Longitude valid range is {-180...180}");
             lon = receiveLongitude();
